@@ -2,7 +2,7 @@ angular.module('kendo.directives').factory('directiveFactory', ['widgetFactory',
 
   function(widgetFactory, $timeout, $parse) {
 
-    function exposeWidget(widget, scope, attrs, kendoWidget) {
+    function exposeWidget(widget, scope, attrs, kendoWidget) {  
       if( attrs[kendoWidget] ) {
         // expose the widget object
         var set = $parse(attrs[kendoWidget]).assign;
@@ -71,7 +71,10 @@ angular.module('kendo.directives').factory('directiveFactory', ['widgetFactory',
             }
 
             // Cleanup after ourselves
-            scope.$on( '$destroy', function() {
+            scope.$on('$destroy', function() {
+              // remove the directive attribute value
+              attrs.$set(kendoWidget, null);
+              // destroy the widget
               widget.destroy();
             });
 
@@ -103,16 +106,17 @@ angular.module('kendo.directives').factory('directiveFactory', ['widgetFactory',
 
     // some widgets change their value with more than one event
     var changeEvents = {
-      NumericTextBox: [ 'change', 'spin' ]
+      All: [ 'change' ],
+      NumericTextBox: ['spin']
     };
 
     // bind to any events that might signify a value change on the widget
     var bind = function(widget, scope, ngModel) {
       
       var role = widget.options.name;
-      var events = changeEvents[role]; 
+      var events = changeEvents.All.concat(changeEvents[role]); 
 
-      angular.forEach(events, function(value) {
+      $.each(events, function(value) {
         widget.bind(value, function(e) {
           // TODO: Why are we doing this apply/digest check?
           if(scope.$root.$$phase === '$apply' || scope.$root.$$phase === '$digest') {
