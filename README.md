@@ -1,3 +1,15 @@
+# DEPRECATED
+
+The Angular-Kendo bindings have been included in [Kendo UI Core](https://github.com/telerik/kendo-ui-core/), and loading `angular-kendo.js` from this repository is no longer necessary.  The [documentation](http://kendo-labs.github.io/angular-kendo/) still applies, with the notice that you must load AngularJS before Kendo UI in order for the directives to be created:
+
+```html
+<script src="jquery.min.js"></script>
+<script src="angular.min.js"></script>
+<script src="kendo.all.min.js"></script>
+```
+
+The complete Kendo version that will contain the Angular bindings will be Q2 2014 ([currently in beta](http://blogs.telerik.com/blogs/14-06-25/kendo-ui-q2-2014-beta-is-here)).
+
 # AngularJS Integration For Kendo UI
 
 ## About angular-kendo
@@ -6,19 +18,17 @@ angular-kendo is a directive for AngularJS that runs an element through Kendo UI
 
 ## Compatibility and Requirements
 
-angular-kendo was designed to work with Kendo UI Web / DataViz and AngularJS version 1.0.4.  Version 1.0.3 of AngularJS is not supported [thanks to this bug](https://github.com/angular/angular.js/issues/1627) that is fixed in 1.0.4.
-
 angular-kendo currently depends on the following libraries:
 
 - [jQuery](http://www.jquery.com) v1.9.1
 - [Kendo UI](http://www.kendoui.com) vCurrent
-- [AngularJS](http://www.angularjs.org) v1.0.5
+- [AngularJS](http://www.angularjs.org) v1.2.1+
 
 angular-kendo has not been tested against any other versions of these libraries. You may find that versions other than these are compatible with angular-kendo, but we make no claims to support those version, nor can we troubleshoot issues that arise when using those versions.
 
 ## Source Code and Downloads
 
-This repository contains both the full and minified version of angular-kendo in the **build** folder.
+This repository contains the full source code in `angular-kendo.js`. To get a minified version, just run `grunt` with no arguments in the top directory and it will create `build/angular-kendo.min.js` (before that you need to run `npm install` if you haven't already).
 
 ## Documentation
 
